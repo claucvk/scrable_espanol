@@ -1,0 +1,23 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+.red-triple-word {
+  background: red;
+}
+
+.pink-double-word {
+  background: #ffc0cb;
+}
+
+.light-blue-double-letter {
+  background: #91bbe4;
+}
+
+.dark-blue-triple-letter {
+  background: #0000ff;
+}
+
+.violet-center-box {
+  background: #cd83de;
+}
