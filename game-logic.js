@@ -9,9 +9,9 @@
 // Create a function that defines the rules to follow and have a winner
 // Create a function to reset the score or start a new game
 
-// Object value[0] = point of the letters - value[1] = number of letters available
-const letters = {
-  noLetter: 0,
+// Object value[0] = points of the letters - value[1] = number of letters available
+const valueNumberletters = {
+  noLetter: [0, 1],
   a: [1, 12],
   b: [3, 2],
   c: [3, 4],
@@ -40,15 +40,18 @@ const letters = {
   z: [10, 1]
 };
 
+// Keep tracking of the letters used from the total number of letters.
+//let numberLetters = 100;
+
 // Get points for each letter selected to form a word and return the total points of the word formed.
 let totalWordPoints = 0;
 const selectedLetter = function(letter) {
   let valueKey = "";
-  let subtractNumberOfLetters = letters[letter] = [letters[letter][0], letters[letter][1] - 1];
+  let subtractNumberOfLetters = valueNumberletters[letter] = [valueNumberletters[letter][0], valueNumberletters[letter][1] - 1];
   console.log("numero de letras ", subtractNumberOfLetters)
-  for (var key in letters) {
+  for (var key in valueNumberletters) {
     if (key === letter) {
-      totalWordPoints += letters[key][0];
+      totalWordPoints += valueNumberletters[key][0];
       console.log(`Match! key: ${key} letter: ${letter} valueKey: ${valueKey}`);
       console.log(`Total word points ${totalWordPoints} `)
       return totalWordPoints;
@@ -56,15 +59,61 @@ const selectedLetter = function(letter) {
   }
 };
 
-selectedLetter("s");
-selectedLetter("i");
+selectedLetter("noLetter");
+selectedLetter("z");
 
-// Limitar las veces que una letra puede ser seleccionada
-  // Cada vez que salga la letra se le resta 1
-  // const numberOfLetters = function (letter) {
-  //   let a = 12;
-  //   if ()
-  // };
+// Alternate player turns
+// Distribute the letter to each player
+// first round --> 7 lettres and substract that number to the total of letters remaining.
+// Following rounds --> number letters used === number letters to take and substract that number to the total of letters remaining.
+// When the player finish to play give the turn to the other player
+
+// Players --> player1 = 0 | player2 = 1
+let currentPlayer;
+
+// Player 1
+const player1Moves = function () {
+  console.log("player1Moves ", currentPlayer);
+  // let player1lettersUsed = 0;
+  // let player1letters = 0;
+  //let player1totalWordPoints = 0;
+  //return toggleturns();
+}
+
+// Player 2
+const player2Moves = function () {
+  console.log("player2Moves ", currentPlayer);
+  // let player1lettersUsed = 0;
+  // let player1letters = 0;
+  // let player1totalWordPoints = 0;
+  //return toggleturns();
+}
+
+// Identifying player's turn
+const toggleturns = function () {
+  if (currentPlayer === 0) {
+    console.log('toggleturns player1 ', currentPlayer);
+    return player1Moves();
+  } else {
+    console.log('toggleturns player2 ', currentPlayer);
+    return player2Moves();
+  }
+}
+
+// Decide which player start to play
+const whichPlayerStart = function () {
+  currentPlayer = Math.floor(Math.random() * 2);
+  if (currentPlayer === 0) {
+    console.log('whichPlayerStart player1 ', currentPlayer);
+    return toggleturns();
+  } else {
+    console.log('whichPlayerStart player2 ', currentPlayer);
+    return toggleturns();
+  }
+}
+whichPlayerStart();
+
+
 
 // Reset totalWordPoints function
 // const resettotalWordPoints = function() {
@@ -72,24 +121,6 @@ selectedLetter("i");
 //     return totalWordPoints = 0;
 //   }
 // };
-
-
-
-// Invocar la selectedLetter function por cada letra escogida
-// Tomar ese valor y sumarle cada valor en otra variable
-
-
-// Distribute the letter to each player
-// first round --> 7 lettres
-// Following rounds --> number letters used === number letters to take
-
-
-// Chosing letters function
-// function chosingLetters() {
-// iterate in the array to find the letter.
-// Example: casa
-// }
-// Checking if the box is empty and accept letter
 
 
 // Game board boxes
