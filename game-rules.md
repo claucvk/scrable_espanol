@@ -15,6 +15,9 @@ El juego se realiza entre 2, 3 o 4 jugadores (en general se juega de a 2), sobre
 
 En total hay 100 fichas, 98 marcadas con letras y dos en blanco (sin puntos, actúan como comodines usándose para reemplazar letras). Según su frecuencia de aparición, las letras tienen más o menos puntos, siempre las de mayor frecuencia valen menos. El tablero tiene también casillas de premiación, que multiplican el número de puntos concedidos: las casillas rojo oscuro son de "triple palabra", las rosas "doble palabra", azul oscuro "triple letra" y celeste "doble letra". El casillero central se marca con una estrella y cuenta como casilla de doble palabra, es obligatorio que el juego comience utilizando esta casilla.
 
+Se debe repartir 7 letras por cada jugador al inicio del juego.
+Después de cada turno, se tendrán que extraer tantas letras nuevas como las que se acaban de jugar. Por ejemplo, si jugaste tres de tus letras para formar una palabra durante tu turno, entonces tendrás que sacar tres más al terminar.
+
 ## Distribución de letras en el Scrabble de habla hispana
 Los juegos en español vendidos fuera de Norteamérica usan estas 100 fichas:
 
@@ -40,3 +43,6 @@ Explicacion de las casillas con premios: http://scrabblesantafe.blogspot.com/200
 
 ## Link Wikipedia
 https://es.wikipedia.org/wiki/Scrabble
+
+## Link wikihow
+https://es.wikihow.com/jugar-Scrabble
