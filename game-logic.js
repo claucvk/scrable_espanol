@@ -42,8 +42,10 @@ let currentPlayer;
 let totalWordPointsPlayer1 = 0;
 let totalWordPointsPlayer2 = 0;
 
-const letters = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "c", "c", "ch", "d", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "j", "l", "l", "l", "l", "ll", "m", "m", "n", "n", "n", "n", "n", "ñ", "o", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r","r", "r", "r", "r", "rr", "s", "s", "s", "s", "s", "s", "t", "t", "t", "t", "u", "u", "u", "u", "u", "v", "x", "y", "z"];
+const lettersBag = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "c", "c", "ch", "d", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "j", "l", "l", "l", "l", "ll", "m", "m", "n", "n", "n", "n", "n", "ñ", "o", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r","r", "r", "r", "r", "rr", "s", "s", "s", "s", "s", "s", "t", "t", "t", "t", "u", "u", "u", "u", "u", "v", "x", "y", "z"];
 
+let lettersRack = [];
+let lettersBoard= [];
 // Distributing the letters to each player (2 players)
 // Keeping tracking of the letters UNUSED -- DISTRIBUTED -- USED.
   // Subtracting the quantity of letters taken from the lettersUnused group (letters bag).
@@ -51,26 +53,19 @@ const letters = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "a",
   // Counting the letters letters used/played (lettresPlayed) to determine how many letters to take from the the lettersUnused group.
 // Initial round --> Take 14 letters (7 for each player) from the lettersUnused = 100
 // Following rounds --> quantity of letters to distribute (lettersDistributed) depends on the quantity of letters used/played (lettresPlayed). The lettersDistributed are taken from the lettersUnused group.
-const lettersUnused = letters.length;
 
-const selectingRandomLetter = function () {
-  const oneRandomLetter = letters[Math.floor(Math.random() * letters.length)];
-  console.log('oneRandomLetter ', oneRandomLetter);
-};
-
-selectingRandomLetter();
-
-const multipleRandomLetters = function (numberOfLetterstoTake) {
-  for (let i = 0; i < numberOfLetterstoTake - 1; i++) {
-   selectingRandomLetter();
+const transferingLettersFromBagtoRack = function (numberOfLetterstoTake) {
+  for (let i = 0; i < numberOfLetterstoTake; i++) {
+    const oneRandomLetter = lettersBag[Math.floor(Math.random() * lettersBag.length)];
+    console.log('oneRandomLetter ', oneRandomLetter);
+    substractingLettersBag = lettersBag.splice(lettersBag.indexOf(oneRandomLetter), 1);
+    console.log('substractingLettersBag ', substractingLettersBag);
+    const addingLettersRack = lettersRack.push(oneRandomLetter);
+    console.log('lettersRack ', lettersRack);
   }
 };
 
-multipleRandomLetters(7);
-
-// push the random generated letters from the letters array
-// make a new array witht the letters random generated
-
+transferingLettersFromBagtoRack(7);
 
 // Counting points earned by each letter used for each player.
 // Keeping record of letters used.
