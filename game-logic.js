@@ -30,18 +30,28 @@
 
 // Players --> player1 = 0 | player2 = 1
 let currentPlayer;
+
 // Get points for each letter selected to form a word and return the total points of the word formed.
 let totalWordPointsPlayer1 = 0;
 let totalWordPointsPlayer2 = 0;
 
 const lettersBag = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "c", "c", "ch", "d", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "j", "l", "l", "l", "l", "ll", "m", "m", "n", "n", "n", "n", "n", "ñ", "o", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r","r", "r", "r", "r", "rr", "s", "s", "s", "s", "s", "s", "t", "t", "t", "t", "u", "u", "u", "u", "u", "v", "x", "y", "z"];
 
-let lettersRack = [];
-let lettersBoard= [];
-// Distributing the letters to each player (2 players)
-// Keeping tracking of the letters in BAG -- RACK -- BOARD.
+let lettersRackPlayer1 = [];
+let lettersRackPlayer2 = [];
+let lettersBoardPlayer1= [];
+let lettersBoardPlayer2= [];
 
-// sumar el total de letras en BAG
+// Decide which player start to play
+const whichPlayerStart = function () {
+  currentPlayer = Math.floor(Math.random() * 2);
+  if (currentPlayer === 0) {
+    console.log('whichPlayerStart player1 ', currentPlayer);
+  } else {
+    console.log('whichPlayerStart player2 ', currentPlayer);
+  }
+}
+whichPlayerStart();
 
 const lettersFromBagToRack = function (numberOfLetterstoTake) {
   for (let i = 0; i < numberOfLetterstoTake; i++) {
@@ -49,28 +59,49 @@ const lettersFromBagToRack = function (numberOfLetterstoTake) {
     //console.log('oneRandomLetter ', oneRandomLetter);
     substractingLettersBag = lettersBag.splice(lettersBag.indexOf(oneRandomLetter), 1);
     //console.log('substractingLettersBag ', substractingLettersBag);
-    const addingLettersRack = lettersRack.push(oneRandomLetter);
-    //console.log('lettersRack ', lettersRack);
+    if (currentPlayer === 0) {
+      const addingLettersRackPlayer1 = lettersRackPlayer1.push(oneRandomLetter);
+      //console.log('lettersRackPlayer1 ', lettersRackPlayer1);
+    } else {
+      const addingLettersRackPlayer2 = lettersRackPlayer2.push(oneRandomLetter);
+      //console.log('lettersRackPlayer2 ', lettersRackPlayer2);
+    }
   }
-  return lettersRack;
 };
 
 lettersFromBagToRack(7);
 
 const lettersFromRackToBoard = function (letter) {
-  const verifyingLetterInLettersRack = lettersRack.includes(letter);
-  console.log('verifyingLetterInLettersRack ', verifyingLetterInLettersRack);
-  if (verifyingLetterInLettersRack) {
-    console.log('lettersRack in Board ', lettersRack);
-    console.log('letter ', letter);
-    const substractingLettersRack = lettersRack.splice(lettersRack.indexOf(letter), 1);
-    console.log('substractingLettersRack ', substractingLettersRack);
-    const addingLettersBoard = lettersBoard.push(letter);
-    console.log('lettersBoard ', lettersBoard);
-    console.log('lettersRack ', lettersRack);
+  if (currentPlayer === 0) {
+    const verifyingLetterInLettersRackPlayer1 = lettersRackPlayer1.includes(letter);
+    console.log('verifyingLetterInLettersRackPlayer1 ', verifyingLetterInLettersRackPlayer1);
+    if (verifyingLetterInLettersRackPlayer1) {
+      console.log('lettersRackPlayer1 in Board ', lettersRackPlayer1);
+      console.log('letter ', letter);
+      const substractingLettersRackPlayer1 = lettersRackPlayer1.splice(lettersRackPlayer1.indexOf(letter), 1);
+      console.log('substractingLettersRackPlayer1 ', substractingLettersRackPlayer1);
+      const addingLettersBoardPlayer1 = lettersBoardPlayer1.push(letter);
+      console.log('lettersBoardPlayer1 ', lettersBoardPlayer1);
+      console.log('lettersBoardPlayer1 ', lettersBoardPlayer1);
+    } else {
+      console.log('letter is not in the lettersRackPlayer1');
+      console.log('lettersRackPlayer1 ', lettersRackPlayer1);
+    }
   } else {
-    console.log('letter is not in the letterRack');
-    console.log('lettersRack ', lettersRack);
+    const verifyingLetterInLettersRackPlayer2 = lettersRackPlayer2.includes(letter);
+    console.log('verifyingLetterInLettersRackPlayer2 ', verifyingLetterInLettersRackPlayer2);
+    if (verifyingLetterInLettersRackPlayer2) {
+      console.log('lettersRackPlayer2 in Board ', lettersRackPlayer2);
+      console.log('letter ', letter);
+      const substractingLettersRackPlayer2 = lettersRackPlayer2.splice(lettersRackPlayer2.indexOf(letter), 1);
+      console.log('substractingLettersRackPlayer2 ', substractingLettersRackPlayer2);
+      const addingLettersBoardPlayer2 = lettersBoardPlayer2.push(letter);
+      console.log('lettersBoardPlayer2 ', lettersBoardPlayer2);
+      console.log('lettersBoardPlayer2 ', lettersBoardPlayer2);
+    } else {
+      console.log('letter is not in the lettersRackPlayer2');
+      console.log('lettersRackPlayer2 ', lettersRackPlayer2);
+    }
   }
 };
 
@@ -79,83 +110,14 @@ lettersFromRackToBoard('i');
 
 
 
-// function for the lettersBoard
-  // From LettersRack to lettersBoard
-  // Add letters played to the lettersBoard
-  // Substract the letters played to the lettersRack
-  // Sum the points from the letters lettresPlayed
-  // Sum the points from the special cases BOARD
-  // Return the total of points fromt letters and cases
-
-
-// Counting points earned by each letter used for each player.
-// Keeping record of letters in board.
-// const selectedLetter = function(letter) {
-//   let valueKey = "";
-//   let subtractNumberOfLetters = letters[letter] = [letters[letter][0], letters[letter][1] - 1];
-//   console.log("numero de letras ", subtractNumberOfLetters)
-//   for (var key in letters) {
-//     if (key === letter) {
-//       if (currentPlayer === 0) {
-//         console.log('Current player1 selectedLetter ', currentPlayer);
-//         totalWordPointsPlayer1 += letters[key][0];
-//         console.log(`Match! key: ${key} letter: ${letter} valueKey: ${valueKey}`);
-//         console.log(`Total word points Player1 ${totalWordPointsPlayer1} `)
-//         return totalWordPointsPlayer1;
-//       } else {
-//         console.log('Current player2 selectedLetter ', currentPlayer);
-//         totalWordPointsPlayer2 += letters[key][0];
-//         console.log(`Match! key: ${key} letter: ${letter} valueKey: ${valueKey}`);
-//         console.log(`Total word points Player2 ${totalWordPointsPlayer2} `)
-//         return totalWordPointsPlayer2;
-//       }
-//     }
-//   }
-// };
-
-
-
-// // Player 1
-// const player1Moves = function () {
-//   selectedLetter("u");
-//   console.log("player1Moves ", currentPlayer);
-//   return currentPlayer = 1;
-//   // let player1lettersUsed = 0;
-//   // let player1letters = 0;
-// }
-//
-// // Player 2
-// const player2Moves = function () {
-//   selectedLetter("m");
-//   console.log("player2Moves ", currentPlayer);
-//   return currentPlayer = 0;
-//   // let player1lettersUsed = 0;
-//   // let player1letters = 0;
-// }
-//
-// // Identifying player's turn.
+// Identifying player's turn.
 // const toggleturns = function () {
 //   if (currentPlayer === 0) {
 //     console.log('toggleturns player1 ', currentPlayer);
-//     return player1Moves();
 //   } else {
 //     console.log('toggleturns player2 ', currentPlayer);
-//     return player2Moves();
 //   }
 // }
-//
-// // Decide which player start to play
-// const whichPlayerStart = function () {
-//   currentPlayer = Math.floor(Math.random() * 2);
-//   if (currentPlayer === 0) {
-//     console.log('whichPlayerStart player1 ', currentPlayer);
-//     return toggleturns();
-//   } else {
-//     console.log('whichPlayerStart player2 ', currentPlayer);
-//     return toggleturns();
-//   }
-// }
-// whichPlayerStart();
 
 // Game board boxes
 let arrNum = 225;
