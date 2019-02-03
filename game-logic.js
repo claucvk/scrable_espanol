@@ -1,11 +1,3 @@
-// Todo List
-// Create a function that set the bonus of the special boxes in the board game. (I can use an object?)
-// Create a function to determine the player's turn
-// Create a function to randomly distribute the letters to each player
-// Create a function that keeps score of each player
-// Create a function that defines the rules to follow and have a winner
-// Create a function to reset the score or start a new game
-
 // noLetter: [0, 2],
 // a: [1, 12],
 // b: [3, 2],
@@ -47,28 +39,57 @@ const lettersBag = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "
 let lettersRack = [];
 let lettersBoard= [];
 // Distributing the letters to each player (2 players)
-// Keeping tracking of the letters UNUSED -- DISTRIBUTED -- USED.
-  // Subtracting the quantity of letters taken from the lettersUnused group (letters bag).
-  // Adding the letters substracted from the lettersUnused group to the lettersDistributed group.
-  // Counting the letters letters used/played (lettresPlayed) to determine how many letters to take from the the lettersUnused group.
-// Initial round --> Take 14 letters (7 for each player) from the lettersUnused = 100
-// Following rounds --> quantity of letters to distribute (lettersDistributed) depends on the quantity of letters used/played (lettresPlayed). The lettersDistributed are taken from the lettersUnused group.
+// Keeping tracking of the letters in BAG -- RACK -- BOARD.
 
-const transferingLettersFromBagtoRack = function (numberOfLetterstoTake) {
+// sumar el total de letras en BAG
+
+const lettersFromBagToRack = function (numberOfLetterstoTake) {
   for (let i = 0; i < numberOfLetterstoTake; i++) {
     const oneRandomLetter = lettersBag[Math.floor(Math.random() * lettersBag.length)];
-    console.log('oneRandomLetter ', oneRandomLetter);
+    //console.log('oneRandomLetter ', oneRandomLetter);
     substractingLettersBag = lettersBag.splice(lettersBag.indexOf(oneRandomLetter), 1);
-    console.log('substractingLettersBag ', substractingLettersBag);
+    //console.log('substractingLettersBag ', substractingLettersBag);
     const addingLettersRack = lettersRack.push(oneRandomLetter);
+    //console.log('lettersRack ', lettersRack);
+  }
+  return lettersRack;
+};
+
+lettersFromBagToRack(7);
+
+const lettersFromRackToBoard = function (letter) {
+  const verifyingLetterInLettersRack = lettersRack.includes(letter);
+  console.log('verifyingLetterInLettersRack ', verifyingLetterInLettersRack);
+  if (verifyingLetterInLettersRack) {
+    console.log('lettersRack in Board ', lettersRack);
+    console.log('letter ', letter);
+    const substractingLettersRack = lettersRack.splice(lettersRack.indexOf(letter), 1);
+    console.log('substractingLettersRack ', substractingLettersRack);
+    const addingLettersBoard = lettersBoard.push(letter);
+    console.log('lettersBoard ', lettersBoard);
+    console.log('lettersRack ', lettersRack);
+  } else {
+    console.log('letter is not in the letterRack');
     console.log('lettersRack ', lettersRack);
   }
 };
 
-transferingLettersFromBagtoRack(7);
+lettersFromRackToBoard('s');
+lettersFromRackToBoard('i');
+
+
+
+// function for the lettersBoard
+  // From LettersRack to lettersBoard
+  // Add letters played to the lettersBoard
+  // Substract the letters played to the lettersRack
+  // Sum the points from the letters lettresPlayed
+  // Sum the points from the special cases BOARD
+  // Return the total of points fromt letters and cases
+
 
 // Counting points earned by each letter used for each player.
-// Keeping record of letters used.
+// Keeping record of letters in board.
 // const selectedLetter = function(letter) {
 //   let valueKey = "";
 //   let subtractNumberOfLetters = letters[letter] = [letters[letter][0], letters[letter][1] - 1];
