@@ -1,6 +1,15 @@
 // Players --> player1 = 0 | player2 = 1
 let currentPlayer;
 
+// Game board squares
+const gameBoardSquares = Array.from(Array(225), (square, i) => i);
+
+const lightBlueSquare2L = [3, 11, 36, 38, 45, 52, 59, 92, 96, 98, 102, 108, 116, 122, 126, 128, 132, 165, 172, 179, 186, 188, 213, 221];
+const darkBlueSquare3L = [20, 24, 76, 80, 84, 88, 136, 140, 144, 148, 200, 204];
+const pinkSquare2W = [16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182, 192, 196, 208];
+const redSquare3W = [0, 7, 14, 105, 119, 210, 217, 224];
+const starSquare2W = [112];
+
 const lettersBag = ["noLetter", "noLetter", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "b", "b", "c", "c", "c", "c", "ch", "d", "d", "d", "d", "d", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "f", "g", "g", "h", "h", "i", "i", "i", "i", "i", "i", "j", "l", "l", "l", "l", "ll", "m", "m", "n", "n", "n", "n", "n", "ñ", "o", "o", "o", "o", "o", "o", "o", "o", "o", "p", "p", "q", "r", "r", "r", "r", "r", "rr", "s", "s", "s", "s", "s", "s", "t", "t", "t", "t", "u", "u", "u", "u", "u", "v", "x", "y", "z"];
 
 let lettersRackPlayer1 = [];
@@ -41,6 +50,8 @@ const lettersPoints = {
 };
 
 // Get points for each letter selected to form a word and return the total points of the word formed.
+let totalLettersPointsPlayer1 = 0;
+let totalLettersPointsPlayer2 = 0;
 let totalWordPointsPlayer1 = 0;
 let totalWordPointsPlayer2 = 0;
 
@@ -130,9 +141,9 @@ const letterPointsSum = function() {
       //console.log('objToArrLettersPoints ', objToArrLettersPoints);
       for (const key of objToArrLettersPoints) {
         if (key === indexLettersBoards) {
-          totalWordPointsPlayer1 += lettersPoints[key];
+          totalLettersPointsPlayer1 += lettersPoints[key];
           console.log('lettersPoints[key] Player1 ', lettersPoints[key]);
-          console.log('totalWordPointsPlayer1 ', totalWordPointsPlayer1);
+          console.log('totalLettersPointsPlayer1 ', totalLettersPointsPlayer1);
         }
       }
     }
@@ -144,9 +155,9 @@ const letterPointsSum = function() {
       //console.log('objToArrLettersPoints ', objToArrLettersPoints);
       for (const key of objToArrLettersPoints) {
         if (key === indexLettersBoards) {
-          totalWordPointsPlayer2 += lettersPoints[key];
-          console.log('lettersPoints[key] Player2 ', lettersPoints[key]);
-          console.log('totalWordPointsPlayer2 ', totalWordPointsPlayer2);
+          totalLettersPointsPlayer2 += lettersPoints[key];
+          //console.log('lettersPoints[key] Player2 ', lettersPoints[key]);
+          //console.log('totalLettersPointsPlayer2 ', totalLettersPointsPlayer2);
         }
       }
     }
@@ -155,24 +166,43 @@ const letterPointsSum = function() {
 
 letterPointsSum();
 
-// Game board boxes
-let arrNum = 225;
-const gameBoardBoxes = Array.from(Array(225), (d, i) => i);
-// console.log("hola ", gameBoardBoxes);
-// console.log("length", gameBoardBoxes.length);
+// lightBlueSquare2L: 2 --> 24 (indexes: 3, 11, 36, 38, 45, 52, 59, 92, 96, 98, 102, 108, 116, 122, 126, 128, 132, 165, 172, 179, 186, 188, 213, 221)
+// darkBlueSquare3L: 3 --> 12 (indexes: 20, 24, 76, 80, 84, 88, 136, 140, 144, 148, 200, 204)
+// pinkSquare2W: 2 --> 16 (indexes: 16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182, 192, 196, 208)
+//const redSquare3W: 3 --> 8 (indexes: 0, 7, 14, 105, 119, 210, 217, 224)
+// starSquare2W: 2 --> 1 (indexes: 112)
 
-// Assigning values to special game board boxes
-// function specialGameBoardBoxes() {
-//   if (red_box is checked) {
-//       multiplicar el total de la palabra x 3
-//   }
-//   if (pink_box is checked) {
-//       multiplicar el total de la palabra x 3
-//   }
-//   if (dark_blue_box is checked) {
-//     multiplicar la letra x 3
-//   }
-//   if (light_blue_box is checked) {
-//     multiplicar letra x2
-//   }
-// }
+const premieumSquaresPointsSum = function (square) {
+  for (let i = 0; i < gameBoardSquares.length; i++) {
+    const findLightBlueSquare2L = lightBlueSquare2L.includes(square);
+    if (square === gameBoardSquares[i]) {
+      console.log('square is in gameBoardSquares[i]');
+      if (findLightBlueSquare2L) {
+        console.log('toy en LightBlueSquare2L');
+        console.log('totalLettersPointsPlayer1 SQUARES ', totalLettersPointsPlayer1);
+      }
+      const findDarkBlueSquare3L = darkBlueSquare3L.includes(square);
+      if (findDarkBlueSquare3L) {
+        console.log('square ', square);
+        console.log('toy en darkBlueSquare3L');
+      }
+      const findPinkSquare2W = pinkSquare2W.includes(square);
+      if (findPinkSquare2W) {
+        console.log('square ', square);
+        console.log('toy en pinkSquare2W');
+      }
+      const findRedSquare3W = redSquare3W.includes(square);
+      if (findRedSquare3W) {
+        console.log('square ', square);
+        console.log('toy en redSquare3W');
+      }
+      const findSquareInStarSquare2W = starSquare2W.includes(square);
+      if (findSquareInStarSquare2W) {
+        console.log('square ', square);
+        console.log('toy en StarSquare2W');
+      }
+    }
+  }
+};
+
+premieumSquaresPointsSum(3);
