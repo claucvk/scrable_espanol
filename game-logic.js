@@ -1,3 +1,4 @@
+'use strict';
 // Players --> player1 = 0 | player2 = 1
 let currentPlayer;
 
@@ -81,7 +82,7 @@ const lettersFromBagToRack = function(numberOfLetterstoTake) {
   for (let i = 0; i < numberOfLetterstoTake; i++) {
     const oneRandomLetter = lettersBag[Math.floor(Math.random() * lettersBag.length)];
     //console.log('oneRandomLetter ', oneRandomLetter);
-    substractingLettersBag = lettersBag.splice(lettersBag.indexOf(oneRandomLetter), 1);
+    const substractingLettersBag = lettersBag.splice(lettersBag.indexOf(oneRandomLetter), 1);
     //console.log('substractingLettersBag ', substractingLettersBag);
     if (currentPlayer === 0) {
       const addingLettersRackPlayer1 = lettersRackPlayer1.push(oneRandomLetter);
@@ -179,6 +180,7 @@ const premieumSquaresPointsSum = function (square) {
       console.log('square is in gameBoardSquares[i]');
       if (findLightBlueSquare2L) {
         console.log('toy en LightBlueSquare2L');
+        totalLettersPointsPlayer1 *= 2;
         console.log('totalLettersPointsPlayer1 SQUARES ', totalLettersPointsPlayer1);
       }
       const findDarkBlueSquare3L = darkBlueSquare3L.includes(square);
